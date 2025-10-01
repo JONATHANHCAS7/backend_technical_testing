@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { RechargesModule } from './recharges/recharges.module';
+import { RechargesModule } from './recharges/infrastructure/recharges.module';
 import { TransactionOrmEntity } from './recharges/infrastructure/persistence/typeorm/entities/transaction.orm-entity';
 
 @Module({

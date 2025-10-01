@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RechargesController } from './interfaces/controllers/recharges.controller';
-import { RechargeApplicationService } from './application/services/recharge.application-service';
-import { Transaction } from './domain/entities/transaction.entity';
-import { Amount } from './domain/value-objects/amount';
-import { PhoneNumber } from './domain/value-objects/phone-number';
+import { RechargesController } from './recharges.controller';
+import { RechargeApplicationService } from '../../application/use-cases/recharge.orchestration.use-case';
+import { Transaction } from '../../domain/entities/transaction.entity';
+import { Amount } from '../../domain/value-objects/amount';
+import { PhoneNumber } from '../../domain/value-objects/phone-number';
 
 describe('RechargesController', () => {
   let controller: RechargesController;

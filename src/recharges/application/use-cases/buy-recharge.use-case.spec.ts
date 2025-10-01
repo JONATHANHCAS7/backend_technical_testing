@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { RechargeApplicationService } from './application/services/recharge.application-service';
-import { BuyRechargeUseCase } from './application/use-cases/buy-recharge.use-case';
-import { GetRechargeHistoryUseCase } from './application/use-cases/get-recharge-history.use-case';
-import { Transaction } from './domain/entities/transaction.entity';
-import { Amount } from './domain/value-objects/amount';
-import { PhoneNumber } from './domain/value-objects/phone-number';
+import { RechargeApplicationService } from './recharge.orchestration.use-case';
+import { BuyRechargeUseCase } from './buy-recharge.use-case';
+import { GetRechargeHistoryUseCase } from './get-recharge-history.use-case';
+import { Transaction } from '../../domain/entities/transaction.entity';
+import { Amount } from '../../domain/value-objects/amount';
+import { PhoneNumber } from '../../domain/value-objects/phone-number';
 
 describe('RechargeApplicationService', () => {
   let service: RechargeApplicationService;
