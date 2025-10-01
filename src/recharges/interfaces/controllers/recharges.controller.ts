@@ -1,5 +1,5 @@
 import { Controller, Post, Body, UseGuards, Request, Get } from '@nestjs/common';
-import { RechargeApplicationService } from '../../../application/recharges/services/recharge.application-service';
+import { RechargeApplicationService } from '../../application/services/recharge.application-service';
 import { RechargeBuyDto } from '../dtos/recharge-buy.dto';
 import { JwtAuthGuard } from '../../../auth/jwt-auth.guard';
 

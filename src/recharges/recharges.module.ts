@@ -1,14 +1,14 @@
 import { Module, OnModuleInit, Inject } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RechargesController } from '../interfaces/http/controllers/recharges.controller';
-import { RechargeApplicationService } from '../application/recharges/services/recharge.application-service';
-import { BuyRechargeUseCase } from '../application/recharges/use-cases/buy-recharge.use-case';
-import { GetRechargeHistoryUseCase } from '../application/recharges/use-cases/get-recharge-history.use-case';
-import { TypeOrmTransactionRepository } from '../infrastructure/persistence/typeorm/repositories/transaction.repository';
-import { InMemoryEventBus } from '../infrastructure/events/in-memory-event-bus';
-import { TransactionOrmEntity } from '../infrastructure/persistence/typeorm/entities/transaction.orm-entity';
-import { RechargeSucceededEvent } from '../domain/recharges/events/recharge-succeeded.event';
-import type { EventBus } from '../domain/recharges/events/event-bus';
+import { RechargesController } from './interfaces/controllers/recharges.controller';
+import { RechargeApplicationService } from './application/services/recharge.application-service';
+import { BuyRechargeUseCase } from './application/use-cases/buy-recharge.use-case';
+import { GetRechargeHistoryUseCase } from './application/use-cases/get-recharge-history.use-case';
+import { TypeOrmTransactionRepository } from './infrastructure/persistence/typeorm/repositories/transaction.repository';
+import { InMemoryEventBus } from './infrastructure/events/in-memory-event-bus';
+import { TransactionOrmEntity } from './infrastructure/persistence/typeorm/entities/transaction.orm-entity';
+import { RechargeSucceededEvent } from './domain/events/recharge-succeeded.event';
+import type { EventBus } from './domain/events/event-bus';
 
 @Module({
   imports: [TypeOrmModule.forFeature([TransactionOrmEntity])],

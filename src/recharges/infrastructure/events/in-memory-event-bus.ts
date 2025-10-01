@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EventBus } from '../../domain/recharges/events/event-bus';
+import { EventBus } from '../../domain/events/event-bus';
 
 @Injectable()
 export class InMemoryEventBus implements EventBus {
