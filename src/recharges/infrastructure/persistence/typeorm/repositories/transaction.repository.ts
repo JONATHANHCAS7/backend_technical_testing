@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TransactionRepository } from '../../../../domain/recharges/repositories/transaction.repository';
-import { Transaction } from '../../../../domain/recharges/entities/transaction.entity';
+import { TransactionRepository } from '../../../../domain/repositories/transaction.repository';
+import { Transaction } from '../../../../domain/entities/transaction.entity';
 import { TransactionOrmEntity } from '../entities/transaction.orm-entity';
-import { Amount } from '../../../../domain/recharges/value-objects/amount';
-import { PhoneNumber } from '../../../../domain/recharges/value-objects/phone-number';
+import { Amount } from '../../../../domain/value-objects/amount';
+import { PhoneNumber } from '../../../../domain/value-objects/phone-number';
 
 @Injectable()
 export class TypeOrmTransactionRepository implements TransactionRepository {

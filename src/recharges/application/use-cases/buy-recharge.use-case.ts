@@ -1,10 +1,10 @@
 import { Injectable, Inject } from '@nestjs/common';
-import type { TransactionRepository } from '../../../domain/recharges/repositories/transaction.repository';
-import type { EventBus } from '../../../domain/recharges/events/event-bus';
-import { Transaction } from '../../../domain/recharges/entities/transaction.entity';
-import { Amount } from '../../../domain/recharges/value-objects/amount';
-import { PhoneNumber } from '../../../domain/recharges/value-objects/phone-number';
-import { RechargeSucceededEvent } from '../../../domain/recharges/events/recharge-succeeded.event';
+import type { TransactionRepository } from '../../domain/repositories/transaction.repository';
+import type { EventBus } from '../../domain/events/event-bus';
+import { Transaction } from '../../domain/entities/transaction.entity';
+import { Amount } from '../../domain/value-objects/amount';
+import { PhoneNumber } from '../../domain/value-objects/phone-number';
+import { RechargeSucceededEvent } from '../../domain/events/recharge-succeeded.event';
 
 @Injectable()
 export class BuyRechargeUseCase {

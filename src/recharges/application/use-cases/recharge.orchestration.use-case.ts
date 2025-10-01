@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { BuyRechargeUseCase } from '../use-cases/buy-recharge.use-case';
 import { GetRechargeHistoryUseCase } from '../use-cases/get-recharge-history.use-case';
-import { Transaction } from '../../../domain/recharges/entities/transaction.entity';
+import { Transaction } from '../../domain/entities/transaction.entity';
 
 @Injectable()
 export class RechargeApplicationService {

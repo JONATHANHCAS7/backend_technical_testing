@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
-import type { TransactionRepository } from '../../../domain/recharges/repositories/transaction.repository';
-import { Transaction } from '../../../domain/recharges/entities/transaction.entity';
+import type { TransactionRepository } from '../../domain/repositories/transaction.repository';
+import { Transaction } from '../../domain/entities/transaction.entity';
 
 @Injectable()
 export class GetRechargeHistoryUseCase {
