@@ -1,6 +1,6 @@
 # API de Recargas Móviles - Prueba Técnica Backend
 
-Esta es una API RESTful desarrollada en **Node.js** con **Nest.js** y **TypeScript** para el módulo de recargas móviles de Puntored. Implementa autenticación JWT, persistencia de datos con SQLite y TypeORM, y sigue principios de Domain-Driven Design (DDD) y Event-Driven Design (EDD).
+Esta es una API RESTful desarrollada en **Node.js** con **Nest.js** y **TypeScript** para el módulo de recargas móviles de Puntored. Implementa autenticación JWT, persistencia de datos con SQLite y TypeORM, y sigue estrictamente los principios de Domain-Driven Design (DDD) y Event-Driven Design (EDD) documentados en [`docs/architecture/`](docs/architecture/).
 
 ## Características
 
@@ -10,6 +10,26 @@ Esta es una API RESTful desarrollada en **Node.js** con **Nest.js** y **TypeScri
 - **Arquitectura DDD**: Separación en capas Domain, Application, Infrastructure e Interfaces.
 - **Eventos**: Event bus en memoria para eventos de dominio.
 - **Tests**: Cobertura con tests unitarios y e2e usando Jest y Supertest.
+## Arquitectura
+
+La aplicación sigue una arquitectura basada en **Domain-Driven Design (DDD)** y **Event-Driven Design (EDD)**, organizada en cuatro capas principales que promueven la separación de responsabilidades, escalabilidad y mantenibilidad.
+
+```mermaid
+graph TD
+    A[Interfaces<br/>- Controllers<br/>- DTOs] --> B[Application<br/>- Use Cases<br/>- DTOs]
+    B --> C[Domain<br/>- Entities<br/>- Value Objects<br/>- Events<br/>- Repositories]
+    C --> D[Infrastructure<br/>- Persistence (TypeORM)<br/>- Event Bus<br/>- Config]
+    
+    E[Auth Module] --> A
+    F[Recharges Module] --> A
+```
+
+- **Interfaces**: Exposición al exterior (controladores HTTP, DTOs).
+- **Application**: Orquestación de casos de uso y coordinación.
+- **Domain**: Lógica de negocio pura (entidades, value objects, eventos).
+- **Infrastructure**: Detalles técnicos (persistencia, event bus).
+
+Para más detalles, consulta los documentos en [`docs/architecture/`](docs/architecture/).
 
 ## Instalación y Ejecución
 
@@ -77,8 +97,10 @@ npm run test:cov
 
 ## Decisiones Técnicas
 
-- **Arquitectura DDD**: Separación clara en capas para mantener el dominio puro y facilitar la escalabilidad.
-- **Event-Driven Design**: Uso de event bus para desacoplar componentes y permitir extensiones futuras.
+- **Arquitectura DDD**: Separación clara en capas (Interfaces → Application → Domain → Infrastructure) para mantener el dominio puro y facilitar la escalabilidad.
+- **Event-Driven Design**: Uso de event bus en memoria para publicar eventos de dominio (ej. RechargeSucceeded), desacoplando componentes y permitiendo extensiones futuras.
+- **Value Objects**: Implementación de objetos de valor inmutables (Amount, PhoneNumber) para encapsular validaciones y lógica de negocio.
+- **Orquestración de Casos de Uso**: Use cases coordinan operaciones complejas, como la orquestración de recargas que involucra múltiples pasos y eventos.
 - **SQLite**: Elegido por simplicidad en configuración, como sugerido en el desafío.
 - **Validaciones**: Aplicadas tanto en DTOs como en objetos de valor del dominio para defensa en profundidad.
 - **Seguridad**: Uso de bcrypt para contraseñas, JWT para autenticación, y validaciones estrictas.
@@ -88,21 +110,31 @@ npm run test:cov
 
 ```
 src/
-├── domain/                 # Lógica de negocio pura
-│   └── recharges/
-│       ├── entities/       # Entidades del dominio
-│       ├── value-objects/  # Objetos de valor
-│       ├── events/         # Eventos de dominio
-│       └── repositories/   # Interfaces de repositorios
-├── application/            # Casos de uso y servicios de aplicación
-│   └── recharges/
-│       ├── use-cases/      # Casos de uso
-│       └── services/       # Servicios de aplicación
-├── infrastructure/         # Detalles técnicos
-│   ├── persistence/        # Repositorios y entidades ORM
-│   └── events/             # Event bus
-└── interfaces/             # Exposición al exterior
-    ├── http/
-    │   ├── controllers/    # Controladores REST
-    │   └── dtos/           # DTOs de entrada/salida
-    └── auth/               # Módulo de autenticación
+├── app.controller.ts
+├── app.controller.spec.ts
+├── app.module.ts
+├── app.service.ts
+├── main.ts
+├── auth/                   # Módulo de autenticación
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   ├── dto/
+│   ├── jwt-auth.guard.ts
+│   └── jwt.strategy.ts
+└── recharges/              # Módulo de recargas
+    ├── application/        # Casos de uso y DTOs
+    │   ├── dto/
+    │   └── use-cases/
+    ├── domain/             # Lógica de negocio pura
+    │   ├── entities/
+    │   ├── value-objects/
+    │   ├── events/
+    │   └── repositories/
+    ├── infrastructure/     # Detalles técnicos
+    │   ├── events/
+    │   ├── persistence/
+    │   └── recharges.module.ts
+    └── interfaces/         # Exposición al exterior
+        └── controllers/
+```
